@@ -1,5 +1,5 @@
 #Name : Dolton Fernandes
-<!-- #Roll No : 2018111007
+#Roll No : 2018111007
 
 *####C-Shell*
 
@@ -25,4 +25,4 @@ A simple interactive shell written in c.
 * pinfo.c : Prints process related info.
 * makefile : Compiles all the .c files to give an executable file.
 * history.c : Stores all the typed commands in a file named history in the same directory as the a.out file. It also prints them on request.
-* dirty.c : Prints the amount of dirty memory after specified amount of time untill the key 'q' is pressed. -->
+* dirty.c : Prints the amount of dirty memory after specified amount of time untill the key 'q' is pressed.
