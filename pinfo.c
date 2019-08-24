@@ -3,7 +3,7 @@
 int pinfo(char **args,char *home)
 {
 	char *path="/proc/",newp[10000];
-	if(args[1]=="")
+	if(strcmp(args[1],"")==0)
 	{
 		sprintf(newp,"%s%d",path,getpid());
 	}
