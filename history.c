@@ -8,10 +8,19 @@ void inithistory(char *hom)
 	strcpy(historypath,hom);
 	strcat(historypath,"/history");
 	FILE *fd=fopen(historypath,"r");
-	if(fd==NULL || fseek(fd,0,SEEK_END)==0)
+	if(fd==NULL)
 	{
 		fd=fopen(historypath,"w");
 		fprintf(fd,"0\n");
+	}
+	else
+	{
+		fseek(fd,0,SEEK_END);
+		if(ftell(fd)==0)
+		{
+			fd=fopen(historypath,"w");
+			fprintf(fd,"0\n");
+		}
 	}
 	fseek(fd,0,SEEK_SET);
 	fscanf(fd,"%d",&histsize);
@@ -20,7 +29,6 @@ void inithistory(char *hom)
 
 void addtohistory(char *c)
 {
-	return ;
 	FILE *fd=fopen(historypath,"r");
 	if(fd==NULL)
 	{
@@ -33,7 +41,6 @@ void addtohistory(char *c)
 	{
 		fscanf(fd,"%[^\n]s",buf);
 		fscanf(fd,"%c",&waste);
-		printf("%s\n",buf);
 		if(i!=0)
 		{
 			strcpy(hist[i-1],buf);
@@ -49,7 +56,7 @@ void addtohistory(char *c)
 		histsize--;
 	}
 	strcpy(hist[histsize++],c);
-	fd=fopen(historypath,"w");
+	fd=fopen(historypath,"w+");
 	if(fd==NULL)
 	{
 		perror(historypath);
@@ -61,6 +68,7 @@ void addtohistory(char *c)
 	{
 		fprintf(fd,"%s\n",hist[i]);
 	}
+	fclose(fd);
 }
 
 void historyexe(char **c)
@@ -74,6 +82,19 @@ void historyexe(char **c)
 	{
 		num=atoi(c[1]);
 	}
+	FILE *fd=fopen(historypath,"r");
+	fseek(fd,0,SEEK_SET);
+	char buf[10000],waste;
+	for(int i=0;i<=histsize;i++)
+	{
+		fscanf(fd,"%[^\n]s",buf);
+		fscanf(fd,"%c",&waste);
+		if(i!=0)
+		{
+			strcpy(hist[i-1],buf);
+		}
+	}
+	fclose(fd);
 	for(int i=(0>histsize-num? 0:histsize-num);i<histsize;i++)
 	{
 		printf("%d %s\n",i+1,hist[i]);
