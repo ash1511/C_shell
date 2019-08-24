@@ -1,7 +1,8 @@
 #include"header.h"
 
-char jobs[1000][1000];
-int jobsize=0,size,size1;
+char hist[25][10000];
+int size,size1,histsize,jobsize=0;
+struct node jobs[10000];
 
 int main(int argc,char* argv[])
 {
@@ -13,9 +14,11 @@ int main(int argc,char* argv[])
 	char* inp1[100];
 	gethome(argv[0],home);
 	printf("\e[1;1H\e[2J");
+	inithistory(home);
 	while(1)
 	{
 		resetinp(inp1);
+		checkbg();
 		getcwdstr(path);
 		makerel(path,home,path2);
 		printterm(user,hostname,path2);

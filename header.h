@@ -1,5 +1,7 @@
 #include<stdio.h> 
 #include<string.h> 
+#include<fcntl.h> 
+#include<errno.h> 
 #include<unistd.h> 
 #include<stdlib.h> 
 #include<dirent.h>
@@ -11,9 +13,16 @@
 #include<termios.h>
 #include<sys/select.h>
 
-extern int size,size1;
-static int histsize=0;
-static char hist[20][10000];
+struct node
+{
+	int status;
+	pid_t pid;
+	char com[100];
+};
+
+extern int size,size1,histsize,jobsize;
+extern char hist[25][10000],historypath[10000];
+extern struct node jobs[10000];
 
 char *uid_to_name(uid_t uid);
 char *gid_to_name(gid_t gid);
@@ -39,3 +48,5 @@ int kbhit();
 void nonblock(int state);
 void dirty(char **c);
 void finddirtysize();
+void inithistory(char *home);
+void checkbg();

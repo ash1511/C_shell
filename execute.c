@@ -12,39 +12,22 @@ void execothers(char **c,int bg)
 	}
 	if(pid==0)
 	{
-		if(!bg)
+		if(execvp(*c,c)<0)
 		{
-			if(execvp(*c,c)<0)
-			{
-				perror("ERROR");
-			}
+			perror("ERROR");
 			return ;
-		}
-		int pid2;
-		if((pid2=fork())==0)
-		{
-			if(execvp(*c,c)<0)
-			{
-				perror("ERROR");
-				return ;
-			}	
-		}
-		else
-		{
-			if(pid2>0)
-			{
-				while(wait(&status)!=pid2);
-				printf("Process with pid %d exited normally\n",pid2);
-			}
-			else
-			{
-				printf("ERROR: forking of child process failed\n");
-			}
 		}
 	}
 	else
 	{
-		if(!bg)
+		if(bg)
+		{
+			jobs[jobsize].pid=pid;
+			jobs[jobsize].status=1;
+			strcpy(jobs[jobsize].com,c[0]);
+			jobsize++;
+		}
+		else
 		{
 			while(wait(&status)!=pid);
 		}
