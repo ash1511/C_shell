@@ -12,8 +12,16 @@ void execothers(char **c,int bg)
 	}
 	if(pid==0)
 	{
-		int pid2=fork();
-		if(pid2==0)
+		if(!bg)
+		{
+			if(execvp(*c,c)<0)
+			{
+				perror("ERROR");
+			}
+			return ;
+		}
+		int pid2;
+		if((pid2=fork())==0)
 		{
 			if(execvp(*c,c)<0)
 			{
@@ -23,8 +31,15 @@ void execothers(char **c,int bg)
 		}
 		else
 		{
-			while(wait(&status)!=pid2);
-			printf("Process with pid %d exited normally\n",pid2);
+			if(pid2>0)
+			{
+				while(wait(&status)!=pid2);
+				printf("Process with pid %d exited normally\n",pid2);
+			}
+			else
+			{
+				printf("ERROR: forking of child process failed\n");
+			}
 		}
 	}
 	else
@@ -56,6 +71,10 @@ int executecommand(char** c,char *path,char *path2,char *home)
 		{
 			break;
 		}
+	}
+	if(c[size1-1][0]=='&' && strlen(c[size1-1])==1)
+	{
+		i=numofcoms;
 	}
 	int l,a,f;
 	switch(i)

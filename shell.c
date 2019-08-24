@@ -18,6 +18,7 @@ int main(int argc,char* argv[])
 		resetinp(inp1);
 		getcwdstr(path);
 		makerel(path,home,path2);
+		printterm(user,hostname,path2);
 		takeinp(inp1);
 		for(int i=0;i<size;i++)
 		{
