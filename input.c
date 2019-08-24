@@ -26,6 +26,7 @@ void resetinp(char** inp)
 	{
 		inp[i]="";
 	}
+	size=0;
 }
 
 void makeinp(char *inp,char **c)

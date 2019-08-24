@@ -17,6 +17,7 @@ void execothers(char **c,int bg)
 			perror("ERROR");
 			return ;
 		}
+		exit(0);
 	}
 	else
 	{
@@ -26,12 +27,14 @@ void execothers(char **c,int bg)
 			jobs[jobsize].status=1;
 			strcpy(jobs[jobsize].com,c[0]);
 			jobsize++;
+			strcpy(c[0],"");
 		}
 		else
 		{
 			while(wait(&status)!=pid);
 		}
 	}
+	strcpy(c[0],"");
 }
 
 int executecommand(char** c,char *path,char *path2,char *home)
