@@ -6,6 +6,8 @@ struct node jobs[10000];
 
 int main(int argc,char* argv[])
 {
+	signal(SIGINT,sigintHandler);
+	signal(SIGTSTP,sigtstpHandler);	
 	char *user=getusername();
 	char hostname[10000];
 	gethname(hostname);
@@ -25,7 +27,6 @@ int main(int argc,char* argv[])
 		takeinp(inp1);
 		for(int i=0;i<size;i++)
 		{
-			resetinp(inp);
 			makeinp(inp1[i],inp);
 			executecommand(inp,path,path2,home);
 		}

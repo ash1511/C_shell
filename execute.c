@@ -39,7 +39,12 @@ void execothers(char **c,int bg)
 
 int executecommand(char** c,char *path,char *path2,char *home)
 {
-	int numofcoms=9;
+	if(itsredirection(c))
+	{
+		redirection(c);
+		return 1;
+	}
+	int numofcoms=15;
 	char* commandslist[numofcoms];
 	commandslist[0]="cd";
 	commandslist[1]="pwd";
@@ -49,7 +54,13 @@ int executecommand(char** c,char *path,char *path2,char *home)
 	commandslist[5]="pinfo";
 	commandslist[6]="history";
 	commandslist[7]="watch";
-	commandslist[8]="exit";
+	commandslist[8]="setenv";
+	commandslist[9]="unsetenv";
+	commandslist[10]="fg";
+	commandslist[11]="bg";
+	commandslist[12]="overkill";
+	commandslist[13]="kjob";
+	commandslist[14]="exit";
 	int i;
 	for(i=0;i<numofcoms;i++)
 	{
@@ -180,6 +191,30 @@ int executecommand(char** c,char *path,char *path2,char *home)
 				dirty(c);
 				return 1;
 		case 8:
+				setenvv(c);
+				return 1;
+		case 9:
+				unsetenvv(c);
+				return 1;
+		case 10:
+				execute_fg(c);
+				return 1;
+		case 11:
+				execute_bg(c);
+				return 1;
+		case 12:
+				for(int i=0;i<jobsize;i++)
+				{
+					kill(jobs[i].pid,9);
+					jobs[i].status=0;
+				}
+				jobsize=0;
+				printf("All jobs killed\n");
+				return 1;
+		case 13:
+				kjob(c);
+				return 1;
+		case 14:
 				printf("\033[1;33mhasta la vista!\n\033[0m");
 				exit(0);
 		default:
