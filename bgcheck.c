@@ -24,7 +24,7 @@ void checkbg()
 			{
 				if(jobs[i].pid==pid && jobs[i].status)
 				{
-					jobs[i].pid=0;
+					jobs[i].status=0;
 					fprintf(stderr,"Process %s with pid %d terminated by a signal.\n",jobs[i].com,pid);
 					break;
 				}

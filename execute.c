@@ -12,10 +12,14 @@ void execothers(char **c,int bg)
 	}
 	if(pid==0)
 	{
+		if(bg)
+		{
+			setpgid(0,0);
+		}
 		if(execvp(*c,c)<0)
 		{
-			perror("ERROR");
-			return ;
+			printf("Invalid Command\n");
+			exit(0);
 		}
 		exit(0);
 	}
@@ -24,17 +28,17 @@ void execothers(char **c,int bg)
 		if(bg)
 		{
 			jobs[jobsize].pid=pid;
+			jobs[jobsize].jobid=jobsize+1;
 			jobs[jobsize].status=1;
 			strcpy(jobs[jobsize].com,c[0]);
 			jobsize++;
-			strcpy(c[0],"");
+            signal(SIGCHLD,checkbg);
 		}
 		else
 		{
 			while(wait(&status)!=pid);
 		}
 	}
-	strcpy(c[0],"");
 }
 
 int executecommand(char** c,char *path,char *path2,char *home)
@@ -44,7 +48,7 @@ int executecommand(char** c,char *path,char *path2,char *home)
 		redirection(c);
 		return 1;
 	}
-	int numofcoms=15;
+	int numofcoms=16;
 	char* commandslist[numofcoms];
 	commandslist[0]="cd";
 	commandslist[1]="pwd";
@@ -60,7 +64,8 @@ int executecommand(char** c,char *path,char *path2,char *home)
 	commandslist[11]="bg";
 	commandslist[12]="overkill";
 	commandslist[13]="kjob";
-	commandslist[14]="exit";
+	commandslist[14]="jobs";
+	commandslist[15]="quit";
 	int i;
 	for(i=0;i<numofcoms;i++)
 	{
@@ -203,18 +208,15 @@ int executecommand(char** c,char *path,char *path2,char *home)
 				execute_bg(c);
 				return 1;
 		case 12:
-				for(int i=0;i<jobsize;i++)
-				{
-					kill(jobs[i].pid,9);
-					jobs[i].status=0;
-				}
-				jobsize=0;
-				printf("All jobs killed\n");
+				ovkill();
 				return 1;
 		case 13:
 				kjob(c);
 				return 1;
 		case 14:
+				job();
+				return 1;
+		case 15:
 				printf("\033[1;33mhasta la vista!\n\033[0m");
 				exit(0);
 		default:

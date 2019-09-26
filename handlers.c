@@ -1,12 +1,5 @@
 #include"header.h"
 
-void sigintHandler(int sig_num)
-{
-	signal(SIGINT,sigintHandler);
-	// fflush(stdout)l;
-}
+void handler1(int sig_num){}
 
-void sigtstpHandler(int sig_num) 
-{ 
-	signal(SIGTSTP,sigtstpHandler);
-}
+void handler2(int sig_num){}

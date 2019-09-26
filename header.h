@@ -15,7 +15,7 @@
 
 struct node
 {
-	int status;
+	int status,jobid;
 	pid_t pid;
 	char com[100];
 };
@@ -50,8 +50,8 @@ void dirty(char **c);
 void finddirtysize();
 void inithistory(char *home);
 void checkbg();
-void sigintHandler(int sig_num);
-void sigtstpHandler(int sig_num);
+void handler1(int sig_num);
+void handler2(int sig_num);
 void setenvv(char **c);
 void unsetenvv(char **c);
 void execute_fg(char **c);
@@ -59,3 +59,9 @@ void execute_bg(char **c);
 void kjob(char **c);
 int redirection(char **c);
 int itsredirection(char **c);
+void piping(char *c,char *path,char *path2,char *home);
+int itspipe(char **c);
+int isup(char *c);
+void uparrowk(int k);
+void job();
+void ovkill();

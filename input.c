@@ -5,8 +5,8 @@ char inpifneeded[10000];
 void takeinp(char** c)
 {
 	char inp[10000],waste;
-	scanf("%[^\n]s",inp);
-	scanf("%c",&waste);
+	fgets(inp,10000,stdin);
+	inp[strlen(inp)-1]='\0';
 	strcpy(inpifneeded,inp);
 	addtohistory(inpifneeded);
 	char *tok=strtok(inp,";");

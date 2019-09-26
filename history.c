@@ -73,12 +73,8 @@ void addtohistory(char *c)
 
 void historyexe(char **c)
 {
-	int num;
-	if(strcmp(c[1],"")==0)
-	{
-		num=10;
-	}
-	else
+	int num=10;
+	if(size1>1)
 	{
 		num=atoi(c[1]);
 	}

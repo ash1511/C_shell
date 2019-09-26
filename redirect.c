@@ -50,7 +50,7 @@ int redirection(char **c)
 		struct stat tmp;
 		if(stat(in,&tmp)<0)
 		{
-			perror("File does not exist\n");
+			perror(in);
 		}
 		inn=dup(0);
    		fd[0]=open(in,O_RDONLY,0644);
@@ -85,7 +85,7 @@ int redirection(char **c)
 	{
 		if(execvp(c[0],c)<0)
 		{
-			perror("Command not found");
+			perror(c[0]);
 			exit(0);
 		}
 	}

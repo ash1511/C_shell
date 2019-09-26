@@ -11,7 +11,7 @@ void execute_fg(char **c)
 	pid_t p=atoi(c[1]);
 	for(i=0;i<jobsize;i++)
 	{
-		if(jobs[i].pid==p)
+		if(jobs[i].jobid==p)
 		{
 			f=1;
 			jobs[i].status=0;
@@ -21,12 +21,12 @@ void execute_fg(char **c)
 	if(f)
 	{
 		int status;
-		kill(p,SIGCONT);
-		waitpid(p,&status,WUNTRACED);
+		kill(jobs[i].pid,SIGCONT);
+		waitpid(jobs[i].pid,&status,WUNTRACED);
 	}
 	else
 	{
-		printf("Process with pid %d doesn't exist\n",p);
+		printf("Process with jobid %d doesn't exist\n",p);
 	}
 }
 
@@ -41,7 +41,7 @@ void execute_bg(char **c)
 	pid_t p=atoi(c[1]);
 	for(i=0;i<jobsize;i++)
 	{
-		if(jobs[i].pid==p)
+		if(jobs[i].jobid==p)
 		{
 			f=1;
 			break;
@@ -50,11 +50,11 @@ void execute_bg(char **c)
 	if(f)
 	{
 		int status;
-		printf("Name = %s\nPid = %d\n",jobs[i].com,p);
-		kill(p,SIGCONT);
+		printf("Name = %s\nJobID = %d\nPid = %d\n",jobs[i].com,p,jobs[i].pid);
+		kill(jobs[i].pid,SIGCONT);
 	}
 	else
 	{
-		printf("Process with pid %d doesn't exist\n",p);
+		printf("Process with jobid %d doesn't exist\n",p);
 	}
 }
