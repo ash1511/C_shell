@@ -4,7 +4,7 @@ char inpifneeded[10000];
 
 void takeinp(char** c)
 {
-	char inp[10000],waste;
+	char inp[10000];
 	fgets(inp,10000,stdin);
 	inp[strlen(inp)-1]='\0';
 	strcpy(inpifneeded,inp);

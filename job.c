@@ -5,8 +5,18 @@ void job()
 	char c1[100],c2[100],name[100];
 	for(int i=0;i<jobsize;i++)
 	{
+		if(jobs[i].status==0)
+		{
+			continue;
+		}
 		sprintf(name,"/proc/%d/stat",jobs[i].pid);
 		FILE *p=fopen(name,"r");
+		if(p==NULL)
+		{
+			printf("Error opening /proc/%d/stat\n",jobs[i].pid);
+			jobs[i].status=0;
+			continue;
+		}
 		fscanf(p,"%s %s %s",c1,c1,c2);
 		if(strcmp(c2,"T")==0)
 		{

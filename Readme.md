@@ -26,3 +26,11 @@ A simple interactive shell written in c.
 * makefile : Compiles all the .c files to give an executable file.
 * history.c : Stores all the typed commands in a file named history in the same directory as the a.out file. It also prints them on request.
 * dirty.c : Prints the amount of dirty memory after specified amount of time untill the key 'q' is pressed.
+* env.c : Setting and unsetting of environment variables.
+* env.c : Setting and unsetting of environment variables.
+* redirect.c : Redirection taken care in this code.
+* fgbg.c : Sending of background process to foreground , Changing status of stopped bg process to running done here.
+* handlers.c : Handles singals Ctrl + C and Ctrl + Z.
+* job.c : Commands job,kjob,overkill written here.
+* pipe.c : Piping of commands written here.
+* uparrow.c : Recall commands using uparrow key and execute done here.

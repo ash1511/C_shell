@@ -37,12 +37,15 @@ void execothers(char **c,int bg)
 		}
 		else
 		{
-			while(wait(&status)!=pid);
+			currjob=pid;
+			strcpy(currjobname,c[0]);
+			waitpid(pid,&status,WUNTRACED);
+			currjob=-1;
 		}
 	}
 }
 
-int executecommand(char** c,char *path,char *path2,char *home)
+int executecommand(char **c,char *path,char *path2,char *home)
 {
 	if(size1==0)
 	{
@@ -53,7 +56,7 @@ int executecommand(char** c,char *path,char *path2,char *home)
 		redirection(c);
 		return 1;
 	}
-	int numofcoms=16;
+	int numofcoms=17;
 	char* commandslist[numofcoms];
 	commandslist[0]="cd";
 	commandslist[1]="pwd";
@@ -70,7 +73,8 @@ int executecommand(char** c,char *path,char *path2,char *home)
 	commandslist[12]="overkill";
 	commandslist[13]="kjob";
 	commandslist[14]="jobs";
-	commandslist[15]="quit";
+	commandslist[15]="cronjob";
+	commandslist[16]="quit";
 	int i;
 	for(i=0;i<numofcoms;i++)
 	{
@@ -222,6 +226,9 @@ int executecommand(char** c,char *path,char *path2,char *home)
 				job();
 				return 1;
 		case 15:
+				cronjob(c);
+				return 1;
+		case 16:
 				printf("\033[1;33mhasta la vista!\n\033[0m");
 				exit(0);
 		default:

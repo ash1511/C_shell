@@ -42,7 +42,7 @@ void uparrowk(char *user,char *hostname,int k,char *path2,char *lel)
 	}
 	fclose(fd);
 	printterm(user,hostname,path2);
-	strcpy(lel,hist[histsize-k]);
+	strcpy(lel,hist[histsize-k-1]);
 	printf("%s\n",lel);
 	histsize--;
 	addtohistory(lel);

@@ -20,8 +20,8 @@ struct node
 	char com[100];
 };
 
-extern int size,size1,histsize,jobsize;
-extern char hist[25][10000],historypath[10000];
+extern int size,size1,histsize,jobsize,currjob;
+extern char hist[25][10000],historypath[10000],currjobname[10000];
 extern struct node jobs[10000];
 
 char *uid_to_name(uid_t uid);
@@ -63,5 +63,6 @@ void piping(char *c,char *path,char *path2,char *home);
 int itspipe(char **c);
 int isup(char **c);
 void uparrowk(char *user,char *hostname,int k,char *path2,char *lel);
+void cronjob(char **c);
 void job();
 void ovkill();

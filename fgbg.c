@@ -23,7 +23,9 @@ void execute_fg(char **c)
 		int status;
 		p=jobs[i].pid;
 		kill(p,SIGCONT);
+		currjob=p;
 		waitpid(p,&status,WUNTRACED);
+		currjob=-1;
 	}
 	else
 	{
@@ -51,7 +53,7 @@ void execute_bg(char **c)
 	if(f)
 	{
 		int status;
-		printf("Name = %s\nJobID = %d\nPid = %d\n",jobs[i].com,p,jobs[i].pid);
+		printf("This process is running now\nName = %s\nJobid = %d\nPid = %d\n",jobs[i].com,p,jobs[i].pid);
 		kill(jobs[i].pid,SIGCONT);
 	}
 	else
