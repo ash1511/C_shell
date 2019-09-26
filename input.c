@@ -32,13 +32,14 @@ void resetinp(char** inp)
 void makeinp(char *inp,char **c)
 {
 	strcpy(inpifneeded,inp);
-	char *tok=strtok(inp," ");
+	char delim[]=" \t";
+	char *tok=strtok(inp,delim);
 	int i=0;
 	while(tok!=NULL)
 	{
 		c[i]=tok;
 		i++;
-		tok=strtok(NULL," ");
+		tok=strtok(NULL,delim);
 	}
 	size1=i;
 }

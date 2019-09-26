@@ -6,8 +6,9 @@ struct node jobs[10000];
 
 int main(int argc,char* argv[])
 {
-	char *user=getusername();
-	char hostname[10000];
+	signal(SIGINT,handler1);
+	signal(SIGTSTP,handler2);
+	char *user=getusername(),hostname[10000];
 	gethname(hostname);
 	char home[10000],path[10000],path2[10000];
 	char* inp[100];
@@ -15,7 +16,6 @@ int main(int argc,char* argv[])
 	gethome(argv[0],home);
 	printf("\e[1;1H\e[2J");
 	inithistory(home);
-	// signal(SIGTSTP,handler2);
 	while(1)
 	{
 		resetinp(inp1);
@@ -23,18 +23,16 @@ int main(int argc,char* argv[])
 		makerel(path,home,path2);
 		printterm(user,hostname,path2);
 		takeinp(inp1);
-		signal(SIGINT,handler1);
 		for(int i=0;i<size;i++)
 		{
 			strcpy(tmp,inp1[i]);
-			int tt=isup(tmp);
+			makeinp(inp1[i],inp);
+			int tt=isup(inp);
 			if(tt)
 			{
-				printf("%d\n",tt);
-				uparrowk(tt);
-				continue;
+				uparrowk(user,hostname,tt,path2,inp1[i]);
+				makeinp(inp1[i],inp);
 			}
-			makeinp(inp1[i],inp);
 			tt=itspipe(inp);
 			if(tt<0)
 			{

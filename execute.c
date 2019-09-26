@@ -32,6 +32,7 @@ void execothers(char **c,int bg)
 			jobs[jobsize].status=1;
 			strcpy(jobs[jobsize].com,c[0]);
 			jobsize++;
+			printf("Job %s sent to background\nJobid = %d , pid = %d\n",c[0],jobsize,pid);
             signal(SIGCHLD,checkbg);
 		}
 		else
@@ -43,6 +44,10 @@ void execothers(char **c,int bg)
 
 int executecommand(char** c,char *path,char *path2,char *home)
 {
+	if(size1==0)
+	{
+		return 1;
+	}
 	if(itsredirection(c))
 	{
 		redirection(c);

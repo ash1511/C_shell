@@ -93,6 +93,6 @@ void historyexe(char **c)
 	fclose(fd);
 	for(int i=(0>histsize-num? 0:histsize-num);i<histsize;i++)
 	{
-		printf("%d %s\n",i+1,hist[i]);
+		printf(" %d %s\n",i+1,hist[i]);
 	}
 }

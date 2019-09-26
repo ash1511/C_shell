@@ -21,8 +21,9 @@ void execute_fg(char **c)
 	if(f)
 	{
 		int status;
-		kill(jobs[i].pid,SIGCONT);
-		waitpid(jobs[i].pid,&status,WUNTRACED);
+		p=jobs[i].pid;
+		kill(p,SIGCONT);
+		waitpid(p,&status,WUNTRACED);
 	}
 	else
 	{
