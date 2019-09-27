@@ -34,14 +34,11 @@ void execothers(char **c,int bg)
 		}
 		else
 		{
-			strcpy(currjobname,c[0]);
 			tcsetpgrp(0,pid);
-			currjob=pid;
 			waitpid(pid,&status,WUNTRACED);
 			signal(SIGTTOU,SIG_IGN);
 			tcsetpgrp(0,getpid());
 			signal(SIGTTOU,SIG_DFL);
-			currjob=-1;
 		}
 	}
 }

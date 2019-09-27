@@ -23,12 +23,10 @@ void execute_fg(char **c)
 		p=jobs[i].pid;
 		kill(p,SIGCONT);
 		tcsetpgrp(0,p);
-		currjob=p;
 		waitpid(p,&status,WUNTRACED);
 		signal(SIGTTOU,SIG_IGN);
 		tcsetpgrp(0,getpid());
 		signal(SIGTTOU,SIG_DFL);
-		currjob=-1;
 	}
 	else
 	{

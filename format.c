@@ -23,7 +23,7 @@ void gethname(char *arr)
 
 void printterm(char *usr,char *host,char *path)
 {
-	printf("\033[1;31m<\033[0m\033[1;32m%s@%s\033[0m:\033[1;34m%s\033[0m\033[1;31m>\033[0m ",usr,host,path);
+	printf("\033[1;31m<\033[0m\033[1;32m%s\033[0m\033[1;33m@\033[0m\033[1;32m%s\033[0m:\033[1;34m%s\033[0m\033[1;31m>\033[0m ",usr,host,path);
 }
 
 int makerel(char *path,char *home,char *path2)

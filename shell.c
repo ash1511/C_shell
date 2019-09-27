@@ -1,16 +1,17 @@
 #include"header.h"
 
-char hist[25][10000],tmp[10000],currjobname[10000];
-int size,size1,histsize,jobsize=0,currjob=-1;
+char hist[25][10000],tmp[10000],path[10000],hostname[10000],path2[10000];
+char *user;
+int size,size1,histsize,jobsize=0;
 struct node jobs[10000];
 
 int main(int argc,char* argv[])
 {
 	signal(SIGINT,handler1);
 	signal(SIGTSTP,handler2);
-	char *user=getusername(),hostname[10000];
+	user=getusername();
 	gethname(hostname);
-	char home[10000],path[10000],path2[10000];
+	char home[10000];
 	char* inp[100];
 	char* inp1[100];
 	gethome(argv[0],home);
