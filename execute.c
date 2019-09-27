@@ -227,6 +227,7 @@ int executecommand(char **c,char *path,char *path2,char *home)
 				cronjob(c);
 				return 1;
 		case 16:
+				ovkill();
 				printf("\033[1;33mhasta la vista!\n\033[0m");
 				exit(0);
 		default:

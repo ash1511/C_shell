@@ -18,6 +18,7 @@ void takeinp(char** c)
 		tok=strtok(NULL,";");
 	}
 	size=i;
+	c[size]=NULL;
 }
 
 void resetinp(char** inp)
@@ -42,4 +43,5 @@ void makeinp(char *inp,char **c)
 		tok=strtok(NULL,delim);
 	}
 	size1=i;
+	c[size1]=NULL;
 }
