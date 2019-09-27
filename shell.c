@@ -1,7 +1,7 @@
 #include"header.h"
 
 char hist[25][10000],tmp[10000],currjobname[10000];
-int size,size1,histsize,jobsize=0,currjob=-1,flag=0;
+int size,size1,histsize,jobsize=0,currjob=-1;
 struct node jobs[10000];
 
 int main(int argc,char* argv[])

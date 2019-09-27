@@ -14,7 +14,6 @@ void execute_fg(char **c)
 		if(jobs[i].jobid==p)
 		{
 			f=1;
-			jobs[i].status=0;
 			break;
 		}
 	}
@@ -23,8 +22,12 @@ void execute_fg(char **c)
 		int status;
 		p=jobs[i].pid;
 		kill(p,SIGCONT);
+		tcsetpgrp(0,p);
 		currjob=p;
 		waitpid(p,&status,WUNTRACED);
+		signal(SIGTTOU,SIG_IGN);
+		tcsetpgrp(0,getpid());
+		signal(SIGTTOU,SIG_DFL);
 		currjob=-1;
 	}
 	else

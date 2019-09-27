@@ -13,7 +13,7 @@ void checkbg()
 				if(jobs[i].pid==pid && jobs[i].status)
 				{
 					jobs[i].status=0;
-					fprintf(stderr,"Process %s with pid %d exited normally.\n",jobs[i].com,pid);
+					fprintf(stderr,"\nProcess %s with pid %d exited normally.\nPress [Enter]\n",jobs[i].com,pid);
 					break;
 				}
 			}
@@ -25,7 +25,7 @@ void checkbg()
 				if(jobs[i].pid==pid && jobs[i].status)
 				{
 					jobs[i].status=0;
-					fprintf(stderr,"Process %s with pid %d terminated by a signal.\n",jobs[i].com,pid);
+					fprintf(stderr,"\nProcess %s with pid %d terminated by a signal.\nPress [Enter]\n",jobs[i].com,pid);
 					break;
 				}
 			}

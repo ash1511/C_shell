@@ -13,7 +13,6 @@ void job()
 		FILE *p=fopen(name,"r");
 		if(p==NULL)
 		{
-			printf("Error opening /proc/%d/stat\n",jobs[i].pid);
 			jobs[i].status=0;
 			continue;
 		}

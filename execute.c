@@ -12,10 +12,7 @@ void execothers(char **c,int bg)
 	}
 	if(pid==0)
 	{
-		if(bg)
-		{
-			setpgid(0,0);
-		}
+		setpgid(0,0);
 		if(execvp(*c,c)<0)
 		{
 			printf("Invalid Command\n");
@@ -25,21 +22,25 @@ void execothers(char **c,int bg)
 	}
 	else
 	{
+		jobs[jobsize].pid=pid;
+		jobs[jobsize].jobid=jobsize+1;
+		jobs[jobsize].status=1;
+		strcpy(jobs[jobsize].com,c[0]);
+		jobsize++;
 		if(bg)
 		{
-			jobs[jobsize].pid=pid;
-			jobs[jobsize].jobid=jobsize+1;
-			jobs[jobsize].status=1;
-			strcpy(jobs[jobsize].com,c[0]);
-			jobsize++;
 			printf("Job %s sent to background\nJobid = %d , pid = %d\n",c[0],jobsize,pid);
             signal(SIGCHLD,checkbg);
 		}
 		else
 		{
-			currjob=pid;
 			strcpy(currjobname,c[0]);
+			tcsetpgrp(0,pid);
+			currjob=pid;
 			waitpid(pid,&status,WUNTRACED);
+			signal(SIGTTOU,SIG_IGN);
+			tcsetpgrp(0,getpid());
+			signal(SIGTTOU,SIG_DFL);
 			currjob=-1;
 		}
 	}
