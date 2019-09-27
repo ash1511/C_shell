@@ -65,4 +65,4 @@ int isup(char **c);
 void uparrowk(char *user,char *hostname,int k,char *path2,char *lel);
 void cronjob(char **c);
 void job();
-void ovkill();
+void ovkill(int f);

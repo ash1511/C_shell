@@ -55,16 +55,22 @@ void kjob(char **c)
 	}
 }
 
-void ovkill()
+void ovkill(int f)
 {
 	for(int i=0;i<jobsize;i++)
 	{
 		if(kill(jobs[i].pid,9)>=0);
 		{
-			printf("Job with jobid = %d , pid = %d killed\n",jobs[i].jobid,jobs[i].pid);
+			if(f)
+			{
+				printf("Job with jobid = %d , pid = %d killed\n",jobs[i].jobid,jobs[i].pid);
+			}
 		}
 		jobs[i].status=0;
 	}
-	printf("All jobs killed\n");
+	if(f)
+	{
+		printf("All jobs killed\n");
+	}
 	jobsize=0;
 }
