@@ -1,18 +1,18 @@
 #Name : Dolton Fernandes
 #Roll No : 2018111007
 
-*####C-Shell*
+*#### C-Shell*
 
 ###Introduction:
 
 A simple interactive shell written in c.
 
-###Running:
+### Running:
 
 * Run make
 * Execute shell by the command : ./a.out
 
-###Files:
+### Files:
 
 * header.h : Contains all the header file , variable , function declarations.
 * shell.c : Contains the main loop and some array declarations.
